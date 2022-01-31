@@ -1,9 +1,8 @@
 const LoginComponent = (props) => {
   return (
     <div>
-      <h1>Login</h1>
-      <label htmlFor="username">username:</label>
       <form onSubmit={props.handleSubmit}>
+        <label htmlFor="username">username:</label>
         <input
           type="text"
           name="username"
