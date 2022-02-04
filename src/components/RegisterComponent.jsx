@@ -13,7 +13,7 @@ const RegisterComponent = (props) => {
     if (createdUserToken) {
       navigate("/shop");
     } else {
-      navigate("/");
+      navigate("/register");
     }
   };
 
