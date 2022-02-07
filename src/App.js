@@ -1,12 +1,7 @@
 import "./App.css";
+import RoutesComponent from "./components/RoutesComponent";
 import Navbar from "./components/navbar";
-import About from "./pages/About";
-import Home from "./pages/Home";
-import Shop from "./pages/Shop";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import { setUserToken, clearUserToken } from "./utils/authToken";
 
@@ -69,16 +64,7 @@ const App = () => {
         isAuthenticated={isAuthenticated}
         setIsAuthenticated={setIsAuthenticated}
       />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="shop" element={<Shop />} />
-        <Route path="login" element={<Login loginUser={loginUser} />} />
-        <Route
-          path="register"
-          element={<Register registerUser={registerUser} />}
-        />
-      </Routes>
+      <RoutesComponent registerUser={registerUser} loginUser={loginUser} />
     </Container>
   );
 };
