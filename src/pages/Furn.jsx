@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const Desks = (props) => {
-  const [desks, setDesks] = useState();
+const Furn = (props) => {
+  const [furn, setFurn] = useState();
+  let { furnCat } = useParams();
   //make get route to find all desks.
-  const getDesks = async () => {
+  const getFurn = async () => {
     try {
-      const allDesks = await fetch("http://localhost:9000/furn/type/desks");
-      const parsedDesks = await allDesks.json();
-      setDesks(parsedDesks);
-      console.log(parsedDesks);
+      console.log(furnCat);
+      const allFurn = await fetch(`http://localhost:9000/furn/type/${furnCat}`);
+      const parsedFurn = await allFurn.json();
+      setFurn(parsedFurn);
+      console.log(parsedFurn);
     } catch (err) {
       console.log(err);
     }
@@ -16,26 +19,26 @@ const Desks = (props) => {
 
   const addToCart = async () => {};
 
-  const dispDesks = () => {
-    if (desks?.length) {
-      return desks.map((desk, idx) => (
+  const dispFurn = () => {
+    if (furn?.length) {
+      return furn.map((furn, idx) => (
         <div key={idx} className="row">
           <div className="col">
-            <img src={`${desk.imgUrl}`} alt="new" className="prodImg"></img>
+            <img src={`${furn.imgUrl}`} alt="new" className="prodImg"></img>
           </div>
           <div className="col">
-            <a href={`${desk._id}`}>
-              <p>{desk.title}</p>
+            <a href={`${furnCat}/${furn._id}`}>
+              <p>{furn.title}</p>
             </a>
           </div>
           <div className="col">
-            <p>{desk.price}</p>
+            <p>{furn.price}</p>
           </div>
           <div className="col">
-            <p>{desk.company}</p>
+            <p>{furn.company}</p>
           </div>
           <div className="col">
-            <p>{desk.finish}</p>
+            <p>{furn.finish}</p>
           </div>
           <div className="col">
             <button>Add to cart</button>
@@ -45,20 +48,22 @@ const Desks = (props) => {
       ));
     } else
       <div>
-        <p>No desks</p>
+        <p>No category picked</p>
       </div>;
   };
 
   useEffect(() => {
-    getDesks();
+    getFurn();
   }, []);
 
   useEffect(() => {
-    dispDesks();
-  }, [desks]);
+    dispFurn();
+  }, [furn]);
   return (
     <div>
-      <h1>Desks</h1>
+      <h1>
+        {furnCat.charAt(0).toUpperCase() + furnCat.slice(1, furnCat.length)}
+      </h1>
       <div>
         <div className="row">
           <div className="col"></div>
@@ -76,9 +81,9 @@ const Desks = (props) => {
           </div>
           <div className="col"></div>
         </div>
-        {dispDesks()}
+        {dispFurn()}
       </div>
     </div>
   );
 };
-export default Desks;
+export default Furn;

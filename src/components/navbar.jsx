@@ -47,9 +47,13 @@ const Navbar = (props) => {
         <a href="/register" className="align-self-center pt-5 p-3">
           Register
         </a>
-        <a href="/cart" className="align-self-center pt-5 p-3">
-          My Cart
-        </a>
+        {props.isAuthenticated ? (
+          <a href="/cart" className="align-self-center pt-5 p-3">
+            My Cart
+          </a>
+        ) : (
+          <></>
+        )}
       </div>
       <hr />
     </div>
