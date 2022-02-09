@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { setUserToken, getUserToken } from "../utils/authToken";
 
 const Navbar = (props) => {
@@ -24,35 +24,35 @@ const Navbar = (props) => {
 
   return (
     <div>
-      <a href="/" className="align-self-center">
+      <Link to="/" className="align-self-center">
         <h1>JJ's</h1>
-      </a>
+      </Link>
       <div className="d-flex justify-content-between align-botttom">
-        <a href="/about" className="justify-content-end pt-5 p-3">
+        <Link to="/about" className="justify-content-end pt-5 p-3">
           About
-        </a>
+        </Link>
 
-        <a href="/shop" className="align-self-center pt-5 p-3">
+        <Link to="/shop" className="align-self-center pt-5 p-3">
           Shop
-        </a>
+        </Link>
         {props.isAuthenticated ? (
-          <a className="align-self-center pt-5 p-3" onClick={logoutUser}>
-            Logout
-          </a>
+          <>
+            <button className="align-self-center pt-5 p-3" onClick={logoutUser}>
+              Logout
+            </button>
+            <Link to="/cart" className="align-self-center pt-5 p-3">
+              My Cart
+            </Link>
+          </>
         ) : (
-          <a href="/login" className="align-self-center pt-5 p-3">
-            Login
-          </a>
-        )}
-        <a href="/register" className="align-self-center pt-5 p-3">
-          Register
-        </a>
-        {props.isAuthenticated ? (
-          <a href="/cart" className="align-self-center pt-5 p-3">
-            My Cart
-          </a>
-        ) : (
-          <></>
+          <>
+            <Link to="/login" className="align-self-center pt-5 p-3">
+              Login
+            </Link>
+            <Link to="/register" className="align-self-center pt-5 p-3">
+              Register
+            </Link>
+          </>
         )}
       </div>
       <hr />

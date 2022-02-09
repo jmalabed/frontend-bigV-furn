@@ -1,4 +1,6 @@
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 const Shop = (props) => {
   return (
     <div>
@@ -6,18 +8,18 @@ const Shop = (props) => {
       <Container>
         <div className="row">
           <div className="col">
-            <a href="/shop/desks">Desks</a>
+            <Link to="/shop/desks">Desks</Link>
           </div>
           <div className="col">
-            <a href="/shop/accessories">Accessories</a>
+            <Link to="/shop/accessories">Accessories</Link>
           </div>
         </div>
         <div className="row">
           <div className="col">
-            <a href="/shop/seating">Seating</a>
+            <Link to="/shop/seating">Seating</Link>
           </div>
           <div className="col">
-            <a href="/shop/furniture">Furniture</a>
+            <Link to="/shop/furniture">Furniture</Link>
           </div>
         </div>
       </Container>

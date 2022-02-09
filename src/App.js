@@ -26,7 +26,6 @@ const App = () => {
       setUserToken(parsedUser.token);
       setCurrentUser(parsedUser.user);
       setIsAuthenticated(parsedUser.isLoggedIn);
-      console.log(parsedUser);
       return parsedUser;
     } catch (err) {
       console.log(err);
@@ -64,7 +63,12 @@ const App = () => {
         isAuthenticated={isAuthenticated}
         setIsAuthenticated={setIsAuthenticated}
       />
-      <RoutesComponent registerUser={registerUser} loginUser={loginUser} />
+      <RoutesComponent
+        registerUser={registerUser}
+        loginUser={loginUser}
+        currentUser={currentUser}
+        isAuthenticated={isAuthenticated}
+      />
     </Container>
   );
 };

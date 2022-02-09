@@ -16,7 +16,15 @@ const RoutesComponent = (props) => {
         <Route path="about" element={<About />} />
         <Route path="shop" element={<Shop />} />
         <Route path="shop/:furnCat" element={<Furn />} />
-        <Route path="shop/:furnCat/:furnId" element={<Product />} />
+        <Route
+          path="shop/:furnCat/:furnId"
+          element={
+            <Product
+              currentUser={props.currentUser}
+              isAuthenticated={props.isAuthenticated}
+            />
+          }
+        />
         <Route path="login" element={<Login loginUser={props.loginUser} />} />
         <Route
           path="register"

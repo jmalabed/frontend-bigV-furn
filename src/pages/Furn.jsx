@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const Furn = (props) => {
   const [furn, setFurn] = useState();
@@ -27,9 +27,9 @@ const Furn = (props) => {
             <img src={`${furn.imgUrl}`} alt="new" className="prodImg"></img>
           </div>
           <div className="col">
-            <a href={`${furnCat}/${furn._id}`}>
+            <Link to={`/shop/${furnCat}/${furn._id}`}>
               <p>{furn.title}</p>
-            </a>
+            </Link>
           </div>
           <div className="col">
             <p>{furn.price}</p>
