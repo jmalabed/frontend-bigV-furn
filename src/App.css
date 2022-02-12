@@ -1,7 +1,27 @@
 body {
   justify-content: center;
+  background-color: red;
+}
+
+html {
+  background-color: #dcdcdc;
 }
 
 .prodImg {
   width: 100%;
+}
+
+.JJlogo {
+  width: 10%;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputBox {
+  width: 50%;
+}
+
+#root {
+  background-color: #dcdcdc;
 }

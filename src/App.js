@@ -62,6 +62,7 @@ const App = () => {
       <Navbar
         isAuthenticated={isAuthenticated}
         setIsAuthenticated={setIsAuthenticated}
+        currentUser={currentUser}
       />
       <RoutesComponent
         registerUser={registerUser}

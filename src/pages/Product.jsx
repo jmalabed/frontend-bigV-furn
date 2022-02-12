@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 const Product = (props) => {
   const [product, setProduct] = useState([]);
@@ -20,7 +20,26 @@ const Product = (props) => {
 
   const addToCart = async () => {
     try {
-      console.log("Hit, adding " + product.title);
+      const updatedItems = props.currentUser.cart.push(product);
+      const updatedCartData = {
+        ...props.currentUser,
+        [props.currentUser.cart]: updatedItems,
+      };
+      const id = props.currentUser._id;
+      const configs = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(updatedCartData),
+      };
+      const updatedCart = await fetch(
+        `http://localhost:9000/auth/${id}`,
+        configs
+      );
+      const parsedCart = await updatedCart.json();
+      console.log(parsedCart);
+      props.setCurrentUser(parsedCart);
     } catch (err) {
       console.log(err);
     }
@@ -32,7 +51,7 @@ const Product = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="m-4">
       <div className="row">
         <div className="col">
           <Card>
@@ -42,7 +61,7 @@ const Product = (props) => {
         <div className="col">
           <div className="row">
             {props.isAuthenticated ? (
-              <button onClick={addToCart}>Add to Cart</button>
+              <Button onClick={addToCart}>Add to Cart</Button>
             ) : (
               <></>
             )}
@@ -50,7 +69,7 @@ const Product = (props) => {
           <div className="row">
             <div className="col">
               <h1>{product.title}</h1>
-              <p>Company: {product.company}</p>
+              <p>By: {product.company}</p>
             </div>
             <div className="col">
               <h2>${product.price}</h2>

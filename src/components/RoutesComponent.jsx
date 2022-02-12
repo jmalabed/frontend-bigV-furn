@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import Desks from "../pages/Desks";
 import Furn from "../pages/Furn";
 import Product from "../pages/Product";
+import Cart from "../pages/Cart";
 import { Routes, Route } from "react-router-dom";
 
 const RoutesComponent = (props) => {
@@ -22,6 +23,7 @@ const RoutesComponent = (props) => {
             <Product
               currentUser={props.currentUser}
               isAuthenticated={props.isAuthenticated}
+              setCurrentUser={props.setCurrentUser}
             />
           }
         />
@@ -30,6 +32,7 @@ const RoutesComponent = (props) => {
           path="register"
           element={<Register registerUser={props.registerUser} />}
         />
+        <Route path="cart" element={<Cart currentUser={props.currentUser} />} />
       </Routes>
     </>
   );

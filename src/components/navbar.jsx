@@ -1,6 +1,8 @@
-import Container from "react-bootstrap/Container";
+import { useEffect } from "react";
+import { Button, Container } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 import { setUserToken, getUserToken } from "../utils/authToken";
+import JJlogo from "../img/JJs.png";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
@@ -24,11 +26,11 @@ const Navbar = (props) => {
 
   return (
     <div>
-      <Link to="/" className="align-self-center">
-        <h1>JJ's</h1>
+      <Link to="/" className="d-flex justify-content-center mt-3">
+        <img src={JJlogo} className="JJlogo" />
       </Link>
       <div className="d-flex justify-content-between align-botttom">
-        <Link to="/about" className="justify-content-end pt-5 p-3">
+        <Link to="/about" className="align-self-center pt-5 p-3">
           About
         </Link>
 
@@ -37,12 +39,19 @@ const Navbar = (props) => {
         </Link>
         {props.isAuthenticated ? (
           <>
-            <button className="align-self-center pt-5 p-3" onClick={logoutUser}>
+            <Button
+              className="align-self-center mt-5 m-3"
+              onClick={logoutUser}
+              variant="danger"
+            >
               Logout
-            </button>
-            <Link to="/cart" className="align-self-center pt-5 p-3">
-              My Cart
-            </Link>
+            </Button>
+            <div>
+              <Link to="/cart" className="align-self-center">
+                My Cart
+              </Link>
+              <p>Items in cart: {props.currentUser.cart.length}</p>
+            </div>
           </>
         ) : (
           <>

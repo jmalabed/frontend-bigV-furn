@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const Furn = (props) => {
   const [furn, setFurn] = useState();
@@ -39,9 +40,6 @@ const Furn = (props) => {
           </div>
           <div className="col">
             <p>{furn.finish}</p>
-          </div>
-          <div className="col">
-            <button>Add to cart</button>
           </div>
           <hr></hr>
         </div>

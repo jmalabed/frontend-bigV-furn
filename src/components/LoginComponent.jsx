@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Card, Container, Form } from "react-bootstrap";
 
 const LoginComponent = (props) => {
   const navigate = useNavigate();
@@ -7,8 +8,7 @@ const LoginComponent = (props) => {
   const [input, setInput] = useState(initialState);
 
   const handleChange = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(input);
+    setInput({ ...input, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -30,25 +30,31 @@ const LoginComponent = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">username:</label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          onChange={handleChange}
-        />
-        <label htmlFor="password">password:</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={handleChange}
-        />
-        <input type="submit" value="Login"></input>
-      </form>
-    </div>
+    <Container className="">
+      <Card className="p-3 d-flex align-items-center">
+        <Form onSubmit={handleSubmit} className="inputBox">
+          <Form.Group className="mb-3" controlId="username">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="username"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="password"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" className="">
+            Login
+          </Button>
+        </Form>
+      </Card>
+    </Container>
   );
 };
 
