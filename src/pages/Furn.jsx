@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
 const Furn = (props) => {
   const [furn, setFurn] = useState();
@@ -23,26 +23,26 @@ const Furn = (props) => {
   const dispFurn = () => {
     if (furn?.length) {
       return furn.map((furn, idx) => (
-        <div key={idx} className="row">
-          <div className="col">
+        <Row key={idx}>
+          <Col sm={2}>
             <img src={`${furn.imgUrl}`} alt="new" className="prodImg"></img>
-          </div>
-          <div className="col">
+          </Col>
+          <Col sm={2}>
             <Link to={`/shop/${furnCat}/${furn._id}`}>
               <p>{furn.title}</p>
             </Link>
-          </div>
-          <div className="col">
+          </Col>
+          <Col sm={2}>
             <p>{furn.price}</p>
-          </div>
-          <div className="col">
+          </Col>
+          <Col sm={2}>
             <p>{furn.company}</p>
-          </div>
-          <div className="col">
+          </Col>
+          <Col sm={2}>
             <p>{furn.finish}</p>
-          </div>
+          </Col>
           <hr></hr>
-        </div>
+        </Row>
       ));
     } else
       <div>
@@ -63,22 +63,22 @@ const Furn = (props) => {
         {furnCat.charAt(0).toUpperCase() + furnCat.slice(1, furnCat.length)}
       </h1>
       <div>
-        <div className="row">
-          <div className="col"></div>
-          <div className="col">
+        <Row>
+          <Col sm={2}></Col>
+          <Col sm={2}>
             <p>Name</p>
-          </div>
-          <div className="col">
+          </Col>
+          <Col sm={2}>
             <p>Cost</p>
-          </div>
-          <div className="col">
+          </Col>
+          <Col sm={2}>
             <p>Company</p>
-          </div>
-          <div className="col">
+          </Col>
+          <Col sm={2}>
             <p>Finish</p>
-          </div>
-          <div className="col"></div>
-        </div>
+          </Col>
+          <Col></Col>
+        </Row>
         {dispFurn()}
       </div>
     </div>

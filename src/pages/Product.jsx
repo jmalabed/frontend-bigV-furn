@@ -20,10 +20,10 @@ const Product = (props) => {
 
   const addToCart = async () => {
     try {
-      const updatedItems = props.currentUser.cart.push(product);
+      const updatedItems = [...props.currentUser.cart, product];
       const updatedCartData = {
         ...props.currentUser,
-        [props.currentUser.cart]: updatedItems,
+        cart: updatedItems,
       };
       const id = props.currentUser._id;
       const configs = {

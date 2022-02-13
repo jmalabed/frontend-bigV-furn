@@ -68,6 +68,7 @@ const App = () => {
         registerUser={registerUser}
         loginUser={loginUser}
         currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
         isAuthenticated={isAuthenticated}
       />
     </Container>

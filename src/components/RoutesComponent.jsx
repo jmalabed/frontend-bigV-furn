@@ -32,7 +32,15 @@ const RoutesComponent = (props) => {
           path="register"
           element={<Register registerUser={props.registerUser} />}
         />
-        <Route path="cart" element={<Cart currentUser={props.currentUser} />} />
+        <Route
+          path="cart"
+          element={
+            <Cart
+              currentUser={props.currentUser}
+              setCurrentUser={props.setCurrentUser}
+            />
+          }
+        />
       </Routes>
     </>
   );
