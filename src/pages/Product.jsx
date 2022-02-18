@@ -4,6 +4,7 @@ import { Button, Card } from "react-bootstrap";
 
 const Product = (props) => {
   const [product, setProduct] = useState([]);
+  const [prodQty, setProdQty] = useState(1);
 
   const { furnId } = useParams();
 
@@ -18,9 +19,19 @@ const Product = (props) => {
     }
   };
 
-  const addToCart = async () => {
+  const updateQty = (e) => {
+    setProdQty(e.target.value);
+  };
+
+  const addToCart = async (e) => {
+    e.preventDefault();
     try {
-      const updatedItems = [...props.currentUser.cart, product];
+      if (props.currentUser.cart.some((item) => item._id === product._id)) {
+        alert("Item is already in cart");
+        return;
+      }
+      const qtyProduct = { ...product, qty: prodQty };
+      const updatedItems = [...props.currentUser.cart, qtyProduct];
       const updatedCartData = {
         ...props.currentUser,
         cart: updatedItems,
@@ -61,7 +72,17 @@ const Product = (props) => {
         <div className="col">
           <div className="row">
             {props.isAuthenticated ? (
-              <Button onClick={addToCart}>Add to Cart</Button>
+              <form onSubmit={addToCart}>
+                <label htmlFor="qty">Qty:</label>
+                <input
+                  type="number"
+                  name="qty"
+                  id="qty"
+                  onChange={updateQty}
+                  value={prodQty}
+                ></input>
+                <input type="submit" value="Add to cart"></input>
+              </form>
             ) : (
               <></>
             )}

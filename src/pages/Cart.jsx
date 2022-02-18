@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import CheckoutComponent from "../components/CheckoutComponent";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 const Cart = (props) => {
-  const [dispCheckout, setDispCheckout] = useState(true);
+  const [dispCheckout, setDispCheckout] = useState(false);
 
   const cost = () => {
     let totCost = null;
     for (let item of props.currentUser.cart) {
-      totCost += item.price;
+      totCost += item.price * item.qty;
     }
     return totCost;
   };
@@ -20,8 +20,6 @@ const Cart = (props) => {
         updateCart.findIndex((ele) => ele._id === id),
         1
       );
-      // console.log(updateCart);
-
       const updatedUser = {
         ...props.currentUser,
         cart: updateCart,
@@ -48,17 +46,26 @@ const Cart = (props) => {
   };
 
   const toggleCheckout = () => {
-    console.log(dispCheckout, "hit");
     setDispCheckout(!dispCheckout);
   };
 
   const dispCart = () => {
-    if (props.currentUser.cart) {
+    if (props.currentUser.cart.length >= 1) {
       return props.currentUser.cart.map((item, i) => {
         return (
           <Row key={i}>
             <Col>
               <p>{item.title}</p>
+            </Col>
+            <Col>
+              <Col>
+                <Row>
+                  <p>Qty:</p>
+                </Row>
+                <Row>
+                  <p>{item.qty}</p>
+                </Row>
+              </Col>
             </Col>
             <Col>
               <p>{item.company}</p>
@@ -75,7 +82,39 @@ const Cart = (props) => {
         );
       });
     } else {
-      return <p>cart is empty</p>;
+      return (
+        <div className="d-flex justify-content-center">
+          <h2 className="mb-3">Cart is empty!</h2>
+        </div>
+      );
+    }
+  };
+
+  const showSubtotal = () => {
+    if (props.currentUser.cart.length >= 1) {
+      return (
+        <>
+          <Row>
+            <Col> </Col>
+            <hr />
+            <Col></Col>
+            <Col>Subtotal: ${cost()}</Col>
+          </Row>
+          <Button onClick={toggleCheckout}>
+            <h3>Ready to checkout?</h3>
+          </Button>
+        </>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
+  const showCheckout = () => {
+    if (dispCheckout) {
+      return <CheckoutComponent />;
+    } else {
+      return <></>;
     }
   };
 
@@ -87,19 +126,10 @@ const Cart = (props) => {
   return (
     <div>
       <h1>Cart</h1>
-      {dispCart()}
-      <Row>
-        <Col></Col>
-        <hr />
-        <Col>Subtotal</Col>
-        <Col>${cost()}</Col>
-      </Row>
+      <Card>{dispCart()}</Card>
+      {showSubtotal()}
 
-      <Button>
-        <h3 onClick={toggleCheckout}>Ready to checkout?</h3>
-      </Button>
-
-      {dispCheckout && <CheckoutComponent />}
+      {showCheckout()}
     </div>
   );
 };

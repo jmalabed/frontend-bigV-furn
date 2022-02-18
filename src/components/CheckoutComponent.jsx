@@ -1,11 +1,72 @@
 import { Button, Form } from "react-bootstrap";
 
 const CheckoutComponent = (props) => {
+  let qbURI = "https://sandbox.api.intuit.com";
   const ccRegX = new RegExp("[0-9/s]{13,19}");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("checkout!");
+  };
+
+  // USE TOKEN TO MAKE CC CHARGE
+  // POST TOKEN
+  const makeToken = async (data) => {
+    try {
+      const configs = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "Application-json",
+        },
+      };
+      const createdToken = await fetch(
+        `${qbURI}/quickbooks/v4/payments/tokens`,
+        configs
+      );
+      const parsedToken = await createdToken.json();
+      console.log(parsedToken);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const makeCardFromToken = async (data) => {
+    try {
+      const configs = {
+        method: "POST",
+        headers: {
+          "Content Type": "Application-json",
+        },
+        body: JSON.stringify(data),
+      };
+      const card = await fetch(
+        `${qbURI}/quickbooks/v4/customers/<id>/cards/createFromToken`,
+        configs
+      );
+      const parsedCard = await card.json();
+      console.log(parsedCard);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const makeCharge = async (token) => {
+    try {
+      const configs = {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application-json",
+        },
+        body: JSON.stringify(token),
+      };
+      const charge = await fetch(
+        `${qbURI}/quickbooks/v4/customers/<id>/cards/createFromToken`,
+        configs
+      );
+      const parsedCharge = await charge.json();
+      console.log(parsedCharge);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
