@@ -9,6 +9,7 @@ import Product from "../pages/Product";
 import Cart from "../pages/Cart";
 import Admin from "../pages/Admin";
 import AdminManage from "../pages/AdminManage";
+import NotFound from "../pages/NotFound";
 import { Routes, Route } from "react-router-dom";
 
 const RoutesComponent = (props) => {
@@ -53,6 +54,7 @@ const RoutesComponent = (props) => {
           }
         />
         <Route path="admin/manage" element={<AdminManage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
