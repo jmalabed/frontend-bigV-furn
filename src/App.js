@@ -1,6 +1,7 @@
 import "./App.css";
 import RoutesComponent from "./components/RoutesComponent";
 import Navbar from "./components/navbar";
+import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { setUserToken, clearUserToken } from "./utils/authToken";
@@ -57,8 +58,16 @@ const App = () => {
     }
   };
 
+  const registerAdmin = async (data) => {
+    // not implemented
+  };
+
+  const loginAdmin = async (data) => {
+    // not implemented
+  };
+
   return (
-    <Container>
+    <div>
       <Navbar
         isAuthenticated={isAuthenticated}
         setIsAuthenticated={setIsAuthenticated}
@@ -70,8 +79,12 @@ const App = () => {
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         isAuthenticated={isAuthenticated}
+        registerAdmin={registerAdmin}
+        loginAdmin={loginAdmin}
       />
-    </Container>
+      <div className="spacer" />
+      <Footer />
+    </div>
   );
 };
 

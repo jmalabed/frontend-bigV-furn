@@ -7,6 +7,8 @@ import Desks from "../pages/Desks";
 import Furn from "../pages/Furn";
 import Product from "../pages/Product";
 import Cart from "../pages/Cart";
+import Admin from "../pages/Admin";
+import AdminManage from "../pages/AdminManage";
 import { Routes, Route } from "react-router-dom";
 
 const RoutesComponent = (props) => {
@@ -41,6 +43,16 @@ const RoutesComponent = (props) => {
             />
           }
         />
+        <Route
+          path="admin"
+          element={
+            <Admin
+              loginAdmin={props.loginAdmin}
+              registerAdmin={props.registerAdmin}
+            />
+          }
+        />
+        <Route path="admin/manage" element={<AdminManage />} />
       </Routes>
     </>
   );

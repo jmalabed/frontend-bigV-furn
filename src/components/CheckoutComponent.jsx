@@ -1,12 +1,49 @@
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 const CheckoutComponent = (props) => {
+  const [customer, setCustomer] = useState({
+    FullyQualifiedName: "King Groceries",
+    PrimaryEmailAddr: {
+      Address: "jdrew@myemail.com",
+    },
+    DisplayName: "King's Groceries",
+    Suffix: "Jr",
+    Title: "Mr",
+    MiddleName: "B",
+    Notes: "Here are other details.",
+    FamilyName: "King",
+    PrimaryPhone: {
+      FreeFormNumber: "(555) 555-5555",
+    },
+    CompanyName: "King Groceries",
+    BillAddr: {
+      CountrySubDivisionCode: "CA",
+      City: "Mountain View",
+      PostalCode: "94042",
+      Line1: "123 Main Street",
+      Country: "USA",
+    },
+    GivenName: "James",
+  });
+  const [billing, setBilling] = useState({});
+
   let qbURI = "https://sandbox.api.intuit.com";
   const ccRegX = new RegExp("[0-9/s]{13,19}");
 
+  const handleChange = (e) => {
+    console.log("hit", e);
+    console.log(e.target.id, e.target.value, e.target.name);
+    setCustomer({ ...customer, [e.target.id]: e.target.value });
+  };
+
+  const handleBillingChange = (e) => {};
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(customer);
     console.log("checkout!");
+    makeCustomer();
   };
 
   // USE TOKEN TO MAKE CC CHARGE
@@ -69,27 +106,66 @@ const CheckoutComponent = (props) => {
     }
   };
 
+  const makeCustomer = async () => {
+    try {
+      console.log("hi");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <h1>Checkout</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="cc">
-          <Form.Label>Credit Card:</Form.Label>
-          <Form.Control type="text" placeholder="Credit Card Number " />
+        <Form.Group controlId="firstName">
+          <Form.Label>First Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Jane"
+            onChange={handleChange}
+            name="GivenName"
+          />
+        </Form.Group>
+        <Form.Group controlId="lastName">
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control type="text" placeholder="Doe" />
+        </Form.Group>
+        <Form.Group controlId="phoneNumber">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="(###)-###-####"
+            onChange={handleChange}
+            name="FamilyName"
+          />
         </Form.Group>
         <Form.Group controlId="email">
           <Form.Label>Email:</Form.Label>
-          <Form.Control type="email" placeholder="email" />
+          <Form.Control
+            type="email"
+            placeholder="doejane@gmail.com"
+            onChange={handleChange}
+            name="PrimaryEmailAddr"
+          />
         </Form.Group>
-        <Form.Group controlId="shipping-address">
-          <Form.Label>Shipping Address</Form.Label>
-          <Form.Control type="text" placeholder="Shipping Address" />
+        <Form.Group controlId="billing-address1">
+          <Form.Label>Billing Address:</Form.Label>
+          <Form.Control type="text" placeholder="1111 Furniture Lane" />
         </Form.Group>
-        <Form.Group controlId="billing-address">
-          <Form.Label>Billing Address</Form.Label>
-          <Form.Control type="text" placeholder="Billing Address" />
-        </Form.Group>
-        <Button type="submit">Checkout!</Button>
+        <div>
+          <Form.Group controlId="city">
+            <Form.Label>City</Form.Label>
+            <Form.Control type="text" placeholder="San Jose" />
+          </Form.Group>
+          <Form.Group controlId="state">
+            <Form.Label>State</Form.Label>
+            <Form.Control type="text" placeholder="CA" />
+          </Form.Group>
+        </div>
+        <Button type="submit" variant="primary">
+          Proceed to checkout
+        </Button>
       </Form>
     </div>
   );

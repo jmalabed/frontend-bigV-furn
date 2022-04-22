@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 
 const Desks = (props) => {
   const [desks, setDesks] = useState();
@@ -57,7 +58,7 @@ const Desks = (props) => {
     dispDesks();
   }, [desks]);
   return (
-    <div>
+    <Container className="mx-5">
       <h1>Desks</h1>
       <div>
         <div className="row">
@@ -78,7 +79,7 @@ const Desks = (props) => {
         </div>
         {dispDesks()}
       </div>
-    </div>
+    </Container>
   );
 };
 export default Desks;

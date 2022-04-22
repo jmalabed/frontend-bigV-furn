@@ -62,25 +62,7 @@ const Furn = (props) => {
       <h1>
         {furnCat.charAt(0).toUpperCase() + furnCat.slice(1, furnCat.length)}
       </h1>
-      <div>
-        <Row>
-          <Col sm={2}></Col>
-          <Col sm={2}>
-            <p>Name</p>
-          </Col>
-          <Col sm={2}>
-            <p>Cost</p>
-          </Col>
-          <Col sm={2}>
-            <p>Company</p>
-          </Col>
-          <Col sm={2}>
-            <p>Finish</p>
-          </Col>
-          <Col></Col>
-        </Row>
-        {dispFurn()}
-      </div>
+      <div>{dispFurn()}</div>
     </div>
   );
 };

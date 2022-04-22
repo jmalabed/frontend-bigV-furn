@@ -30,14 +30,14 @@ const LoginComponent = (props) => {
   };
 
   return (
-    <Container className="">
-      <Card className="p-3 d-flex align-items-center">
+    <Container className="w-50">
+      <Card className="p-5 d-flex align-items-center">
         <Form onSubmit={handleSubmit} className="inputBox">
           <Form.Group className="mb-3" controlId="username">
             <Form.Label>Username:</Form.Label>
             <Form.Control
               type="text"
-              placeholder="username"
+              placeholder="Username"
               onChange={handleChange}
             />
           </Form.Group>
@@ -45,7 +45,7 @@ const LoginComponent = (props) => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              placeholder="password"
+              placeholder="Password"
               onChange={handleChange}
             />
           </Form.Group>

@@ -1,6 +1,9 @@
-import Navbar from "../components/navbar";
+import ShopComponent from "../components/ShopComponent";
+import BargainBinComponent from "../components/BargainBinComponent";
+
 import { Container } from "react-bootstrap";
-import office from "../img/officeFront.png";
+import office from "../img/home-short.png";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
   return (
@@ -23,7 +26,13 @@ const Home = (props) => {
         </div>
       </Container>
       <div className="row">
-        <img src={office} />
+        <img src={office} alt="Office furniture" />
+      </div>
+
+      <div className="mx-5 mt-3">
+        <h2 className="text-center">All Products</h2>
+        <ShopComponent />
+        <BargainBinComponent />
       </div>
     </div>
   );

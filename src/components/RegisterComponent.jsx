@@ -23,8 +23,8 @@ const RegisterComponent = (props) => {
   };
 
   return (
-    <Container>
-      <Card className="p-3 d-flex align-items-center">
+    <Container className="w-50">
+      <Card className="p-5 d-flex align-items-center">
         <Form onSubmit={handleSubmit} className="inputBox">
           <Form.Group className="mb-3" controlId="username">
             <Form.Label>Username:</Form.Label>
